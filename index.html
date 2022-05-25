@@ -9,21 +9,28 @@
 <body>
     <input type="text" id="text">
     <a href="#" download="dl.png" onclick="this.href=canvas.toDataURL()" >下載</a>
-    <div><canvas id="canvas"></canvas></div>
+    <div>
+        <img src="./image/skyler-ewing-PHdhffx_Xb0-unsplash.jpg" alt="">
+        <canvas id="canvas"></canvas>
+    </div>
 </body>
+<style>
+    div {
+        position: relative;
+    }
+    #canvas {
+        position: absolute;
+        left: 0;
+    }
+</style>
 <script>
-    var img = new Image();
-    img.src="./image/skyler-ewing-PHdhffx_Xb0-unsplash.jpg"
+    var img = document.querySelector('img');
     var canvas = document.querySelector('#canvas');
     var text = document.querySelector('#text');
     var naturalImgSize = [img.naturalWidth,img.naturalHeight];
     var ctx = canvas.getContext("2d");
-    img.onload = function(){
-        canvas.width = naturalImgSize[0];
-        canvas.height = naturalImgSize[1];
-        ctx.drawImage(img,0,0);
-        
-    }
+    canvas.width = naturalImgSize[0];
+    canvas.height = naturalImgSize[1];
     text.addEventListener('change',()=>{
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img,0,0);
