@@ -8,7 +8,7 @@
 </head>
 <body>
     <input type="text" id="text">
-    <a href="#" download="dl.png" onclick="this.href=canvas.toDataURL()" >下載</a>
+    <button id="btn">生成圖片</button>
     <div>
         <img src="./image/skyler-ewing-PHdhffx_Xb0-unsplash.jpg" alt="">
         <canvas id="canvas"></canvas>
@@ -21,6 +21,7 @@
     #canvas {
         position: absolute;
         left: 0;
+        top: 0;
     }
 </style>
 <script>
@@ -29,6 +30,7 @@
     var text = document.querySelector('#text');
     var naturalImgSize = [img.naturalWidth,img.naturalHeight];
     var ctx = canvas.getContext("2d");
+
     canvas.width = naturalImgSize[0];
     canvas.height = naturalImgSize[1];
     text.addEventListener('change',()=>{
@@ -37,6 +39,11 @@
         ctx.fillStyle="rgba(244, 244, 244, 0.8)"
         ctx.font = "30px Playfair Display";
         ctx.fillText(text.value, 30, img.naturalHeight-30);
+    })
+    document.querySelector('#btn').addEventListener('click',()=>{
+        let dataImg = new Image()
+        dataImg.src = canvas.toDataURL()
+        document.body.appendChild(dataImg)
     })
 </script>
 </html>
