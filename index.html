@@ -27,35 +27,28 @@
     }
 </style>
 <script>
-    var img = document.querySelector('img');
-    var canvas = document.querySelector('#canvas');
-    var text = document.querySelector('#text');
-    var ctx = canvas.getContext("2d");
-    var newimg
-    canvas.width = 640;
-    canvas.height = 800;
-    text.addEventListener('change',()=>{     
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img,0,0);
-        ctx.fillStyle="rgba(244, 244, 244, 0.8)"
-        ctx.font = "30px Playfair Display";
-        ctx.fillText(text.value, 30, img.naturalHeight-30);
-    })
-    document.querySelector('#btn').addEventListener('click',()=>{
-        canvas.toBlob((blob) => {
-            newimg = new Image();
-            newimg.src = URL.createObjectURL(blob);
-            document.getElementById('download').href = newimg.src
-            document.body.appendChild(newimg);
-        });
-    })
-    // document.querySelector('#download').onclick= function(){
-    //     var link = document.createElement("a");
-    //     link.download = "image.png";
-    //     canvas.toBlob(function(blob){
-    //         link.href = URL.createObjectURL(blob);  
-    //     },'image/png');
-    //     link.click();
-    // }
+ var canvas = document.getElementById('canvas');
+var d = canvas.width;
+ctx = canvas.getContext('2d');
+ctx.beginPath();
+ctx.moveTo(d / 2, 0);
+ctx.lineTo(d, d);
+ctx.lineTo(0, d);
+ctx.closePath();
+ctx.fillStyle = 'yellow';
+ctx.fill();
+
+function blobCallback(iconName) {
+  return function(b) {
+    var a = document.createElement('a');
+    a.textContent = 'Download';
+    document.body.appendChild(a);
+    a.style.display = 'block';
+    a.download = iconName + '.jpg';
+    a.href = window.URL.createObjectURL(b);
+  }
+}
+canvas.toBlob(blobCallback('passThisString'), 'image/jpg',
+              '-moz-parse-options:format=bmp;bpp=32');
 </script>
 </html>
