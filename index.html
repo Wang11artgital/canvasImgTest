@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" Content-Disposition: attachment;>
     <title>Document</title>
 </head>
 <body>
@@ -12,6 +12,7 @@
     <div>
         <img src="./image/skyler-ewing-PHdhffx_Xb0-unsplash.jpg" alt="">
         <canvas id="canvas"></canvas>
+        <a href="headers=Content-Disposition%3A%20attachment%3B%20" download="dl.png" onclick="this.href=canvas.toDataURL();" >下載</a>
     </div>
 </body>
 <style>
@@ -28,12 +29,10 @@
     var img = document.querySelector('img');
     var canvas = document.querySelector('#canvas');
     var text = document.querySelector('#text');
-    var naturalImgSize = [img.naturalWidth,img.naturalHeight];
     var ctx = canvas.getContext("2d");
-
-    canvas.width = naturalImgSize[0];
-    canvas.height = naturalImgSize[1];
-    text.addEventListener('change',()=>{
+    canvas.width = 640;
+    canvas.height = 800;
+    text.addEventListener('change',()=>{     
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img,0,0);
         ctx.fillStyle="rgba(244, 244, 244, 0.8)"
