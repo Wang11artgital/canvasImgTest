@@ -13,7 +13,7 @@
         <img src="./image/skyler-ewing-PHdhffx_Xb0-unsplash.jpg" alt="">
         <canvas id="canvas"></canvas>
         <a download href="./image/skyler-ewing-PHdhffx_Xb0-unsplash.jpg">下載</a>
-        <a download href="canvas.toDataURL()">下載</a>
+        <a target="_blank" download="123.jpg" href="#" onclick="this.href=canvas.toDataURL();">下載</a>
     </div>
 </body>
 <style>
@@ -39,7 +39,6 @@
         ctx.fillStyle="rgba(244, 244, 244, 0.8)"
         ctx.font = "30px Playfair Display";
         ctx.fillText(text.value, 30, img.naturalHeight-30);
-        console.log(canvas.toDataURL())
     })
     document.querySelector('#btn').addEventListener('click',()=>{
         let dataImg = new Image()
