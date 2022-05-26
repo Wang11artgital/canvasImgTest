@@ -13,7 +13,7 @@
         <img src="./image/skyler-ewing-PHdhffx_Xb0-unsplash.jpg" alt="">
         <canvas id="canvas"></canvas>
         <a download href="./image/skyler-ewing-PHdhffx_Xb0-unsplash.jpg">下載</a>
-        <a target="_blank" download="123.jpg" href="#" onclick="this.href=canvas.toDataURL();">下載</a>
+        <a download="image.png" href="#" id="download">下載</a>
     </div>
 </body>
 <style>
@@ -31,6 +31,7 @@
     var canvas = document.querySelector('#canvas');
     var text = document.querySelector('#text');
     var ctx = canvas.getContext("2d");
+    var newimg
     canvas.width = 640;
     canvas.height = 800;
     text.addEventListener('change',()=>{     
@@ -41,9 +42,20 @@
         ctx.fillText(text.value, 30, img.naturalHeight-30);
     })
     document.querySelector('#btn').addEventListener('click',()=>{
-        let dataImg = new Image()
-        dataImg.src = canvas.toDataURL()
-        document.body.appendChild(dataImg)
+        canvas.toBlob((blob) => {
+            newimg = new Image();
+            newimg.src = URL.createObjectURL(blob);
+            document.getElementById('download').href = newimg.src
+            document.body.appendChild(newimg);
+        });
     })
+    // document.querySelector('#download').onclick= function(){
+    //     var link = document.createElement("a");
+    //     link.download = "image.png";
+    //     canvas.toBlob(function(blob){
+    //         link.href = URL.createObjectURL(blob);  
+    //     },'image/png');
+    //     link.click();
+    // }
 </script>
 </html>
