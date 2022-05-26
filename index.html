@@ -31,7 +31,6 @@
     var canvas = document.querySelector('#canvas');
     var text = document.querySelector('#text');
     var ctx = canvas.getContext("2d");
-    var newimg
     canvas.width = 2400;
     canvas.height = 1350;
     text.addEventListener('change',()=>{     
@@ -42,8 +41,11 @@
         ctx.fillText(text.value, 30, img.naturalHeight-30);
     })
     document.querySelector('#btn').addEventListener('click',()=>{
+        let img2 = new Image();
+        img2.src = canvas.toDataURL()
+        document.body.appendChild(img2);
         canvas.toBlob((blob) => {
-            newimg = new Image();
+            var newimg = new Image();
             newimg.src = URL.createObjectURL(blob);
             document.getElementById('download').href = newimg.src
             document.body.appendChild(newimg);
